@@ -7,17 +7,14 @@ foreach (new SplFileObject('input.txt') as $line) {
         continue;
     };
 
-    $values = explode('   ', $line);
-    $left[] = (int) $values[0];
-    $right[] = (int) $values[1];
+    [$left[], $right[]] = array_map('intval', explode('   ', $line));
 }
 
 sort($left);
 sort($right);
 
-foreach ($left as $index => $value) {
-    $values = [$value, $right[$index]];
-    $distance += abs($values[0] - $values[1]);
+foreach (array_combine($left, $right) as $value1 => $value2) {
+    $distance += abs($value1 - $value2);
 }
 
 echo $distance;

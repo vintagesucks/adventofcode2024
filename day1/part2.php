@@ -7,9 +7,7 @@ foreach (new SplFileObject('input.txt') as $line) {
         continue;
     };
 
-    $values = explode('   ', $line);
-    $left[] = (int) $values[0];
-    $right[] = (int) $values[1];
+    [$left[], $right[]] = array_map('intval', explode('   ', $line));
 }
 
 $rightCounts = array_count_values($right);
